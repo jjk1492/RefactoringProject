@@ -134,6 +134,7 @@
 import java.util.*;
 
 public class Lane extends Thread implements PinsetterObserver {
+    private final static int MAX_GAMES = 128;
     private Party party;
     private Pinsetter setter;
     private HashMap<Bowler, int[]> scores;
@@ -156,7 +157,7 @@ public class Lane extends Thread implements PinsetterObserver {
     private int[][] finalScores;
     private int gameNumber;
 
-    private Bowler currentThrower;            // = the thrower who just took a throw
+    private Bowler currentThrower;
 
     /**
      * Lane()
@@ -300,6 +301,7 @@ public class Lane extends Thread implements PinsetterObserver {
      * @param pe The pinsetter event that has been received.
      */
     public void receivePinsetterEvent(PinsetterEvent pe) {
+
 
         if (pe.pinsDownOnThisThrow() >= 0) {            // this is a real throw
             markScore(currentThrower, frameNumber + 1, pe.getThrowNumber(), pe.pinsDownOnThisThrow());
